@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,7 @@ namespace MU.Identity.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route(nameof(ChangePassword))]
         public async Task<ActionResult> ChangePassword(ChangePasswordInputModel input)
             => await this.identity.ChangePassword(this.currentUser.UserId, new ChangePasswordInputModel

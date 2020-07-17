@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Threading.Tasks;
 
 namespace MU.Common.Infrastructure
 {
@@ -25,11 +26,11 @@ namespace MU.Common.Infrastructure
             {
             services
                 .AddDatabase<TDbContext>(configuration)
-                .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddTokenApplicationSettings(configuration)
+                .AddTokenAuthentication(configuration)
                 .AddHttpContextAccessor()
                 .AddScoped<ICurrentUserService, CurrentUserService>()
-                .AddTokenAuthentication(configuration)
+                .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers();
 
                 return services;
@@ -72,6 +73,7 @@ namespace MU.Common.Infrastructure
             services
                 .AddAuthentication(authentication =>
                 {
+                    authentication.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                     authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
