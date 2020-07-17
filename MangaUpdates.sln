@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Common", "MU.Common\MU.Common.csproj", "{8A71257C-29D1-4360-8C73-6643B8D6C242}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Identity", "MU.Identity\MU.Identity.csproj", "{924357A0-479C-49FB-9FCF-AB74E11389C9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A71257C-29D1-4360-8C73-6643B8D6C242} = {8A71257C-29D1-4360-8C73-6643B8D6C242}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Publishers", "MU.Publishers\MU.Publishers.csproj", "{EDF7DD89-ECB1-407C-815A-1E762E6C0C7D}"
 EndProject

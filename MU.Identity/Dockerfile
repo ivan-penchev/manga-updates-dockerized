@@ -6,10 +6,11 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["MU.Identity.csproj", ""]
-RUN dotnet restore "./MU.Identity.csproj"
+COPY ["MU.Identity/MU.Identity.csproj", "MU.Identity/"]
+COPY ["MU.Common/MU.Common.csproj", "MU.Common/"]
+RUN dotnet restore "MU.Identity/MU.Identity.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/MU.Identity"
 RUN dotnet build "MU.Identity.csproj" -c Release -o /app/build
 
 FROM build AS publish

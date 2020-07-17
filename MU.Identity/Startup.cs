@@ -9,6 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MU.Common.Infrastructure;
+using MU.Common.Services;
+using MU.Identity.Data;
+using MU.Identity.Infrastructure;
+using MU.Identity.Services;
+using MU.Identity.Services.Interfaces;
 
 namespace MU.Identity
 {
@@ -24,25 +30,20 @@ namespace MU.Identity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddWebMicroService<IdentityDbContext>(this.Configuration)
+                .AddIdentityApiAndStore()
+                .AddTransient<IDataSeeder, IdentityDataSeeder>()
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseWebMicroService(env)
+                .Initialize();
         }
+
     }
 }

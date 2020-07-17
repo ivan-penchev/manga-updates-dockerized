@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MU.Common.Services;
 
 namespace MU.Common.Infrastructure
 {
@@ -18,16 +19,23 @@ namespace MU.Common.Infrastructure
             }
 
             app
+                //.UseHttpsRedirection() ???
                 .UseRouting()
                 .UseCors(options => options
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod())
+                .UseAuthentication()
+                .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
+                    //endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                    //{
+                    //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                    //});
+
                     endpoints.MapControllers();
                 });
-
             return app;
         }
 
@@ -40,6 +48,13 @@ namespace MU.Common.Infrastructure
             var db = serviceProvider.GetRequiredService<DbContext>();
 
             db.Database.Migrate();
+
+            var seeders = serviceProvider.GetServices<IDataSeeder>();
+
+            foreach (var seeder in seeders)
+            {
+                seeder.SeedData();
+            }
 
             return app;
         }

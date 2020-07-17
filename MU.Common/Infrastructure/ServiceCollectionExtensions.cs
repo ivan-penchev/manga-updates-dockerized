@@ -8,6 +8,11 @@ using MU.Common.Extensions;
 using Microsoft.Extensions.Configuration;
 using GreenPipes;
 using MU.Common.Models;
+using MU.Common.Services.Identity;
+using Microsoft.AspNetCore.Authentication;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MU.Common.Infrastructure
 {
@@ -18,10 +23,14 @@ namespace MU.Common.Infrastructure
                 IConfiguration configuration)
                 where TDbContext : DbContext
             {
-                services
-                    .AddDatabase<TDbContext>(configuration)
-                    .AddAutoMapperProfile(Assembly.GetCallingAssembly())
-                    .AddControllers();
+            services
+                .AddDatabase<TDbContext>(configuration)
+                .AddAutoMapperProfile(Assembly.GetCallingAssembly())
+                .AddTokenApplicationSettings(configuration)
+                .AddHttpContextAccessor()
+                .AddScoped<ICurrentUserService, CurrentUserService>()
+                .AddTokenAuthentication(configuration)
+                .AddControllers();
 
                 return services;
             }
@@ -41,7 +50,53 @@ namespace MU.Common.Infrastructure
                                    maxRetryDelay: TimeSpan.FromSeconds(30),
                                    errorNumbersToAdd: null)));
 
-            public static IServiceCollection AddAutoMapperProfile(
+        public static IServiceCollection AddTokenApplicationSettings(
+            this IServiceCollection services,
+            IConfiguration configuration)
+            => services
+                .Configure<TokenSettings>(
+                    configuration.GetSection(nameof(TokenSettings)),
+                    config => config.BindNonPublicProperties = true);
+
+        public static IServiceCollection AddTokenAuthentication(
+           this IServiceCollection services,
+           IConfiguration configuration,
+           JwtBearerEvents events = null)
+        {
+            var secret = configuration
+                .GetSection(nameof(TokenSettings))
+                .GetValue<string>(nameof(TokenSettings.Secret));
+
+            var key = Encoding.ASCII.GetBytes(secret);
+
+            services
+                .AddAuthentication(authentication =>
+                {
+                    authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(bearer =>
+                {
+                    bearer.RequireHttpsMetadata = false;
+                    bearer.SaveToken = true;
+                    bearer.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+
+                    if (events != null)
+                    {
+                        bearer.Events = events;
+                    }
+                });
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapperProfile(
                 this IServiceCollection services,
                 Assembly assembly)
                 => services

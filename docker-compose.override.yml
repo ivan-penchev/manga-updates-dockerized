@@ -2,23 +2,33 @@ version: '3.4'
 
 services:
   mu.identity:
+    env_file: MU.Common/Common.env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=IdentityDb;User Id=sa;Password=yourStrongPassword12!@;MultipleActiveResultSets=true
     ports:
       - "5001:80"
+    restart: on-failure
+    depends_on:
+      - mu.data
+    networks: 
+        - manga-updates-network
 
   mu.publishers:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5002:80"
-
+    networks: 
+        - manga-updates-network
 
   mu.translators:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5003:80"
+    networks: 
+        - manga-updates-network
 
   mu.data:
     ports: 
