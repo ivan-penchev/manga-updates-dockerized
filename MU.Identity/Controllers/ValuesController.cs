@@ -18,4 +18,3 @@ namespace MU.Identity.Controllers
         }
     }
 }
-}

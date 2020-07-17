@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  mu.identity:
+    image: ${DOCKER_REGISTRY-}muidentity
+    build:
+      context: .
+      dockerfile: MU.Identity/Dockerfile
+
+  mu.publishers:
+    image: ${DOCKER_REGISTRY-}mupublishers
+    build:
+      context: .
+      dockerfile: MU.Publishers/Dockerfile
+
+
+  mu.translators:
+    image: ${DOCKER_REGISTRY-}mutranslators
+    build:
+      context: .
+      dockerfile: MU.Translators/Dockerfile
+
