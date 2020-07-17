@@ -20,3 +20,25 @@ services:
     ports:
       - "5003:80"
 
+  mu.data:
+    ports: 
+        - "1433:1433"
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=yourStrongPassword12!@
+    volumes: 
+        - sqldata:/var/opt/mssql 
+    networks: 
+        - manga-updates-network
+
+  mu.messages:
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+    hostname: "rabbitmq"
+    environment:
+        - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASS=guest
+    networks: 
+        - manga-updates-network

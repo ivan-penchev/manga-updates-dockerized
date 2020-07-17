@@ -2,21 +2,37 @@ version: '3.4'
 
 services:
   mu.identity:
+    container_name: identity
     image: ${DOCKER_REGISTRY-}muidentity
     build:
       context: .
       dockerfile: MU.Identity/Dockerfile
 
   mu.publishers:
+    container_name: publishers
     image: ${DOCKER_REGISTRY-}mupublishers
     build:
       context: .
       dockerfile: MU.Publishers/Dockerfile
 
-
   mu.translators:
+    container_name: translators
     image: ${DOCKER_REGISTRY-}mutranslators
     build:
       context: .
       dockerfile: MU.Translators/Dockerfile
 
+  mu.data:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
+  mu.messages:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+        
+
+networks:
+    manga-updates-network:
+
+volumes:
+    sqldata:
