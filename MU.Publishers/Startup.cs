@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using MU.Common.Infrastructure;
 using MU.Common.Services;
 using MU.Publishers.Data;
+using MU.Publishers.Services.Genres;
 
 namespace MU.Publishers
 {
@@ -28,7 +29,8 @@ namespace MU.Publishers
         {
             services
                 .AddWebMicroService<PublishersDbContext>(this.Configuration)
-                .AddTransient<IDataSeeder, PublisherDbSeeder>();
+                .AddTransient<IDataSeeder, PublisherDbSeeder>()
+                .AddTransient<IGenreService, GenreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

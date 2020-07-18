@@ -14,10 +14,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MU.Common\MU.Common.csproj" />
   </ItemGroup>
