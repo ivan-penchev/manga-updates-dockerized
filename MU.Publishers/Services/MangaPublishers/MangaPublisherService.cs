@@ -24,6 +24,9 @@ namespace MU.Publishers.Services.MangaPublishers
         public async Task<MangaPublisher> Find(int id)
         => await this.Data.FindAsync<MangaPublisher>(id);
 
+        public async Task<MangaPublisher> Find(string name)
+        => await this.All().Where(f => f.Name.ToLower().Contains(name)).FirstOrDefaultAsync();
+
         public async Task<IEnumerable<MangaPublisherDetailsOutputModel>> GetAllMangaPublishers()
         => await this.mapper.ProjectTo<MangaPublisherDetailsOutputModel>(this.All().Include(x => x.Mangas)).ToListAsync();
 
