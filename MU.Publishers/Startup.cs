@@ -12,6 +12,7 @@ using MU.Common.Infrastructure;
 using MU.Common.Services;
 using MU.Publishers.Data;
 using MU.Publishers.Services.Genres;
+using MU.Publishers.Services.MangaPublishers;
 
 namespace MU.Publishers
 {
@@ -30,7 +31,8 @@ namespace MU.Publishers
             services
                 .AddWebMicroService<PublishersDbContext>(this.Configuration)
                 .AddTransient<IDataSeeder, PublisherDbSeeder>()
-                .AddTransient<IGenreService, GenreService>();
+                .AddTransient<IGenreService, GenreService>()
+                .AddTransient<IMangaPublisherService, MangaPublisherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
