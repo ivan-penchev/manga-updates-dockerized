@@ -11,6 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Identity", "MU.Identity\
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Publishers", "MU.Publishers\MU.Publishers.csproj", "{EDF7DD89-ECB1-407C-815A-1E762E6C0C7D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A71257C-29D1-4360-8C73-6643B8D6C242} = {8A71257C-29D1-4360-8C73-6643B8D6C242}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Translators", "MU.Translators\MU.Translators.csproj", "{A848E87D-64F8-4910-B2A4-734BEDA8D899}"
 EndProject

@@ -15,8 +15,11 @@ services:
         - manga-updates-network
 
   mu.publishers:
+    env_file: MU.Common/Common.env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=PublishersDb;User Id=sa;Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+    restart: on-failure
     ports:
       - "5002:80"
     networks: 
