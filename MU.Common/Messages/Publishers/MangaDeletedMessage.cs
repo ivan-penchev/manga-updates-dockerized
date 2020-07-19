@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MU.Publishers.Messages
+namespace MU.Common.Messages
 {
-    public class MangaUpdatedMessage
+    public class MangaDeletedMessage
     {
         public int MangaId { get; set; }
         public string Publisher { get; set; }

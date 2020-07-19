@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MU.Common.Infrastructure;
+using MU.Translators.Messages;
 
 namespace MU.Translators
 {
@@ -24,6 +26,8 @@ namespace MU.Translators
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddMessaging(this.Configuration, typeof(MangaCreatedConsumer), typeof(MangaUpdatedConsumer), typeof(MangaDeletedConsumer));
             services.AddControllers();
         }
 

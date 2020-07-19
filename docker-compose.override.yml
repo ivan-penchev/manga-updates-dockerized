@@ -26,6 +26,7 @@ services:
         - manga-updates-network
 
   mu.translators:
+    env_file: MU.Common/Common.env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
