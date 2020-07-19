@@ -29,6 +29,7 @@ services:
     env_file: MU.Common/Common.env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=TranslatorsDb;User Id=sa;Password=yourStrongPassword12!@;MultipleActiveResultSets=true
     ports:
       - "5003:80"
     networks: 

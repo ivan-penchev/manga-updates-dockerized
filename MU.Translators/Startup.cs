@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MU.Common.Infrastructure;
+using MU.Translators.Data;
 using MU.Translators.Messages;
 
 namespace MU.Translators
@@ -27,26 +28,20 @@ namespace MU.Translators
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMessaging(this.Configuration, typeof(MangaCreatedConsumer), typeof(MangaUpdatedConsumer), typeof(MangaDeletedConsumer));
-            services.AddControllers();
+                .AddWebMicroService<TranslatorDbContext>(this.Configuration)
+                .AddMessaging(this.Configuration, 
+                    typeof(MangaCreatedConsumer), 
+                    typeof(MangaUpdatedConsumer), 
+                    typeof(MangaDeletedConsumer)
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseWebMicroService(env)
+                .Initialize();
         }
     }
 }
