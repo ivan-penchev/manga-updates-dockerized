@@ -114,9 +114,12 @@ namespace MU.Publishers.Controllers
             }
             manga.Genre = genre;
             manga.Publisher = publisher;
-            manga.Title = input.Title;
-            manga.Author = input.Author;
-            manga.Description = input.Description;
+            manga.Title = string.IsNullOrWhiteSpace(input.Title)
+                            ? manga.Title : input.Title;
+            manga.Author = string.IsNullOrWhiteSpace(input.Author) 
+                            ? manga.Author : input.Author;
+            manga.Description = string.IsNullOrWhiteSpace(input.Description)
+                            ? manga.Description : input.Description;
             manga.Status = input.Status;
             manga.StartDate = input.StartDate;
             manga.CompleteDate = input.CompleteDate;
