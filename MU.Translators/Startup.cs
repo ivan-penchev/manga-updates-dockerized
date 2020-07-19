@@ -10,8 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MU.Common.Infrastructure;
+using MU.Common.Services;
 using MU.Translators.Data;
 using MU.Translators.Messages;
+using MU.Translators.Services;
 
 namespace MU.Translators
 {
@@ -33,7 +35,11 @@ namespace MU.Translators
                     typeof(MangaCreatedConsumer), 
                     typeof(MangaUpdatedConsumer), 
                     typeof(MangaDeletedConsumer)
-                );
+                )
+                .AddTransient<IDataSeeder, TranslatorDbContextSeeder>()
+                .AddTransient<ITitleService, TitleService>()
+                .AddTransient<ITranslatorGroupService, TranslatorGroupService>()
+                .AddTransient<ITranslatorService, TranslatorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

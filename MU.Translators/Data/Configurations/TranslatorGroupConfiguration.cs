@@ -12,12 +12,11 @@ namespace MU.Translators.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TranslatorGroup> builder)
         {
-            builder.HasKey(x => x.Id);
-
-            //builder
-            //    .HasMany(x => x.TranslatedTitles)
-            //    .WithOne(x => x.TranslatorGroup)
-            //    .HasForeignKey(x => x.TranslatorGroupId);
+            builder
+                .HasKey(x => x.Id);
+            builder
+                .Property(x => x.Name)
+                .IsRequired();
 
         }
     }

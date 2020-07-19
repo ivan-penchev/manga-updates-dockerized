@@ -13,10 +13,14 @@ namespace MU.Translators.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Title> builder)
         {
-            builder.HasKey(x => x.Id);
-            //builder
-            //    .HasMany(x => x.Translations)
-            //    .WithOne(e=>e.Title);
+            builder
+                .HasKey(x => x.Id);
+            builder
+              .Property(x => x.TitleId)
+              .IsRequired();
+            builder
+             .Property(x => x.PublishedBy)
+             .IsRequired();
         }
     }
 }

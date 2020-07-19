@@ -13,8 +13,8 @@ namespace MU.Translators.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TitleId = table.Column<string>(nullable: true),
-                    PublishedBy = table.Column<string>(nullable: true)
+                    TitleId = table.Column<string>(nullable: false),
+                    PublishedBy = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +27,7 @@ namespace MU.Translators.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
