@@ -70,9 +70,9 @@ namespace MU.Common.Infrastructure
                 .AddSqlServer(configuration.GetDefaultConnectionString());
             // 	Multiple segments in path of AMQP URI: /, /, rabbitmq:guest@guest/
 
-            var rabbitConnectionString = "amqp://"+$"rabbitmq:{configuration["RabbitMq:user"]}@{configuration["RabbitMq:pass"]}"+"/";
+            var rabbitConnectionString = "amqp://"+$"{configuration["RabbitMq:host"]}:{configuration["RabbitMq:user"]}@{configuration["RabbitMq:pass"]}"+"/";
             healthChecks
-                .AddRabbitMQ(rabbitConnectionString: "amqp:///rabbitmq:guest@guest/");
+                .AddRabbitMQ(rabbitConnectionString: rabbitConnectionString);
 
             return services;
         }
@@ -143,6 +143,8 @@ namespace MU.Common.Infrastructure
                                 host.Username(configuration["RabbitMq:user"]);
                                 host.Password(configuration["RabbitMq:pass"]);
                             });
+
+                            rmq.UseHealthCheck(context);
 
 
                             consumers.ForEach(consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
