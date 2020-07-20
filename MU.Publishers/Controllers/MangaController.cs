@@ -79,6 +79,7 @@ namespace MU.Publishers.Controllers
                 StartDate = input.StartDate,
                 Status = input.Status
             };
+            await this.mangaService.Save(manga);
 
             var mangaMessage = new MangaCreatedMessage
             {
@@ -86,7 +87,7 @@ namespace MU.Publishers.Controllers
                 Publisher = manga.Publisher.Name
             };
 
-            await this.mangaService.Save(manga);
+           
             await this.publisher.Publish(mangaMessage);
 
             return Ok();

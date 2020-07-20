@@ -35,6 +35,14 @@ services:
     networks: 
         - manga-updates-network
 
+  mu.watchdog:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5004:80"
+    networks: 
+        - manga-updates-network
+
   mu.data:
     ports: 
         - "1433:1433"

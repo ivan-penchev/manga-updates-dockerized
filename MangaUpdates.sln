@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MU.Translators", "MU.Transl
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3D370192-92DB-4BCA-8362-F1CC860DEADF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Watchdog", "MU.Watchdog\MU.Watchdog.csproj", "{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{3D370192-92DB-4BCA-8362-F1CC860DEADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D370192-92DB-4BCA-8362-F1CC860DEADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D370192-92DB-4BCA-8362-F1CC860DEADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

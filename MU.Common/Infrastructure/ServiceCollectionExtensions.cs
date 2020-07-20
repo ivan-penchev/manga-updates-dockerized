@@ -28,6 +28,7 @@ namespace MU.Common.Infrastructure
                 .AddDatabase<TDbContext>(configuration)
                 .AddTokenApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
+                .AddHealth(configuration)
                 .AddHttpContextAccessor()
                 .AddScoped<ICurrentUserService, CurrentUserService>()
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
@@ -58,6 +59,24 @@ namespace MU.Common.Infrastructure
                 .Configure<TokenSettings>(
                     configuration.GetSection(nameof(TokenSettings)),
                     config => config.BindNonPublicProperties = true);
+
+        public static IServiceCollection AddHealth(
+           this IServiceCollection services,
+           IConfiguration configuration)
+        {
+            var healthChecks = services.AddHealthChecks();
+
+            healthChecks
+                .AddSqlServer(configuration.GetDefaultConnectionString());
+            // 	Multiple segments in path of AMQP URI: /, /, rabbitmq:guest@guest/
+
+            var rabbitConnectionString = "amqp://"+$"rabbitmq:{configuration["RabbitMq:user"]}@{configuration["RabbitMq:pass"]}"+"/";
+            healthChecks
+                .AddRabbitMQ(rabbitConnectionString: "amqp:///rabbitmq:guest@guest/");
+
+            return services;
+        }
+
 
         public static IServiceCollection AddTokenAuthentication(
            this IServiceCollection services,

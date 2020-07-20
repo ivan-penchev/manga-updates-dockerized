@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MU.Common.Services;
+using HealthChecks.UI.Client;
 
 namespace MU.Common.Infrastructure
 {
@@ -29,10 +31,10 @@ namespace MU.Common.Infrastructure
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    //endpoints.MapHealthChecks("/health", new HealthCheckOptions
-                    //{
-                    //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                    //});
+                    endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                    {
+                        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                    });
 
                     endpoints.MapControllers();
                 });
