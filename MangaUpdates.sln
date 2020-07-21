@@ -21,6 +21,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Watchdog", "MU.Watchdog\MU.Watchdog.csproj", "{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Gateway", "MU.Gateway\MU.Gateway.csproj", "{59B89A9B-62AB-4870-8F8B-F75380B918B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68FFB3DA-9B27-4C30-B3E8-84D45DD2855E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

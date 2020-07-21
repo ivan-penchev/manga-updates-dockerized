@@ -43,6 +43,14 @@ services:
     networks: 
         - manga-updates-network
 
+  mu.gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5010:80"
+    networks: 
+        - manga-updates-network
+
   mu.data:
     ports: 
         - "1433:1433"
