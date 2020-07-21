@@ -36,9 +36,24 @@ namespace MU.Translators.Services
             return await this.GetStatus(userId, previousApplication);
         }
 
-        public Task Approve(int translatorId)
+        public async Task Approve(Translator translator)
         {
-            throw new NotImplementedException();
+            translator.ApprovedByAdmin = true;
+            translator.DateApprovedByAdmin = DateTime.Now;
+            await this.Save(translator);
+        }
+
+        public async Task<Translator> Find(int translatorId)
+        => await this.All().FirstOrDefaultAsync(x => x.Id == translatorId);
+
+        public async Task<List<TranslatorApplicationOutput>> GetAllUnapprovedApplications()
+        {
+            var applicationsToReturn = new List<TranslatorApplicationOutput>();
+            var applicationsForReview = await this.All().Where(x => x.ApprovedByAdmin == false).ToListAsync();
+            if (applicationsForReview.Count > 0)
+                applicationsForReview.ForEach(x => applicationsToReturn.Add(this.GenerateApplication(x))); //Efficient code is efficient :D
+
+            return applicationsToReturn;
         }
 
         public async Task<TranslatorApplicationOutput> GetStatus(string userId, Translator translatorEntity = null)
@@ -52,6 +67,7 @@ namespace MU.Translators.Services
         private TranslatorApplicationOutput GenerateApplication(Translator translator)
         {
             var application = new TranslatorApplicationOutput { 
+                ApplicationId = translator.Id,
                 ApplicationStatus = TranslatorApplicationStatus.NotApplied,
                 ApplicationReceived = DateTime.Now 
             };

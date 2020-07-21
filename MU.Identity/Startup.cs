@@ -13,6 +13,7 @@ using MU.Common.Infrastructure;
 using MU.Common.Services;
 using MU.Identity.Data;
 using MU.Identity.Infrastructure;
+using MU.Identity.Messages.Consumers;
 using MU.Identity.Services;
 using MU.Identity.Services.Interfaces;
 
@@ -32,6 +33,7 @@ namespace MU.Identity
         {
             services.AddWebMicroService<IdentityDbContext>(this.Configuration)
                 .AddIdentityApiAndStore()
+                .AddMessaging(this.Configuration, typeof(TranslatorApprovedConsumer))
                 .AddTransient<IDataSeeder, IdentityDataSeeder>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<ITokenGeneratorService, TokenGeneratorService>();

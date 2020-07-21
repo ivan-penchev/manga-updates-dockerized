@@ -7,6 +7,7 @@ namespace MU.Translators.Models.Translator
 {
     public class TranslatorApplicationOutput
     {
+        public int ApplicationId { get; set; }
         public TranslatorApplicationStatus ApplicationStatus { get; set; }
         public DateTime ApplicationReceived { get; set; }
     }
