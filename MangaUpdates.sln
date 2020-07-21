@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Watchdog", "MU.Watchdog\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Gateway", "MU.Gateway\MU.Gateway.csproj", "{59B89A9B-62AB-4870-8F8B-F75380B918B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MU.Admin", "MU.Admin\MU.Admin.csproj", "{BCE55C9A-188E-4179-B4B6-869E2636FF10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59B89A9B-62AB-4870-8F8B-F75380B918B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE55C9A-188E-4179-B4B6-869E2636FF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE55C9A-188E-4179-B4B6-869E2636FF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE55C9A-188E-4179-B4B6-869E2636FF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE55C9A-188E-4179-B4B6-869E2636FF10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

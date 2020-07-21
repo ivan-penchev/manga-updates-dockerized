@@ -50,6 +50,14 @@ services:
       - "5010:80"
     networks: 
         - manga-updates-network
+  mu.admin:
+    env_file: MU.Common/Common.env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5005:80"
+    networks: 
+        - manga-updates-network
 
   mu.data:
     ports: 
